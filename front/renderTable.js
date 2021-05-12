@@ -27,13 +27,20 @@ const table = new Tabulator("#table1", {
     ],
     columns: [ //define the table columns
         {
+            title: "№",
+            hozAlign: "left",
+            formatter: "rownum",
+            width: 50,
+            editor: "input"
+        },
+        {
             title: "Название",
             field: "name",
             hozAlign: "left",
             editor: "input"
         },
         {
-            title: "Ссылка",
+            title: "Линк",
             field: "link",
             hozAlign: "left",
             formatter: "link",
@@ -41,6 +48,7 @@ const table = new Tabulator("#table1", {
                 label: "url",
                 target: "_blank",
             },
+            width: 95,
             editor: true
         },
         {
@@ -52,7 +60,7 @@ const table = new Tabulator("#table1", {
         {
             title: "Cкриншот",
             field: "screenshot",
-            hozAlign: "center",
+            hozAlign: "left",
             formatter: "tickCross",
             formatterParams: {
                 allowEmpty: true
@@ -63,7 +71,7 @@ const table = new Tabulator("#table1", {
         {
             title: "Мобильные",
             field: "mobile",
-            hozAlign: "center",
+            hozAlign: "left",
             formatter: "tickCross",
             formatterParams: {
                 allowEmpty: true
@@ -74,7 +82,7 @@ const table = new Tabulator("#table1", {
         {
             title: "Пр.клик",
             field: "rightClick",
-            hozAlign: "center",
+            hozAlign: "left",
             formatter: "tickCross",
             formatterParams: {
                 allowEmpty: true
@@ -85,7 +93,7 @@ const table = new Tabulator("#table1", {
         {
             title: "Выд-е текста",
             field: "textSelection",
-            hozAlign: "center",
+            hozAlign: "left",
             formatter: "tickCross",
             formatterParams: {
                 allowEmpty: true
@@ -96,7 +104,7 @@ const table = new Tabulator("#table1", {
         {
             title: "F12",
             field: "F12",
-            hozAlign: "center",
+            hozAlign: "left",
             formatter: "tickCross",
             formatterParams: {
                 allowEmpty: true
@@ -107,7 +115,7 @@ const table = new Tabulator("#table1", {
         {
             title: "Ctrl+Shift+I",
             field: "ctrlShiftI",
-            hozAlign: "center",
+            hozAlign: "left",
             formatter: "tickCross",
             formatterParams: {
                 allowEmpty: true
@@ -118,7 +126,7 @@ const table = new Tabulator("#table1", {
         {
             title: "Ctrl+U",
             field: "ctrlU",
-            hozAlign: "center",
+            hozAlign: "left",
             formatter: "tickCross",
             formatterParams: {
                 allowEmpty: true
@@ -129,7 +137,7 @@ const table = new Tabulator("#table1", {
         {
             title: "Ctrl+A,C,V,X",
             field: "ctrlACVX",
-            hozAlign: "center",
+            hozAlign: "left",
             formatter: "tickCross",
             formatterParams: {
                 allowEmpty: true
@@ -140,7 +148,7 @@ const table = new Tabulator("#table1", {
         {
             title: "Ctrl+S",
             field: "ctrlS",
-            hozAlign: "center",
+            hozAlign: "left",
             formatter: "tickCross",
             formatterParams: {
                 allowEmpty: true
@@ -151,7 +159,7 @@ const table = new Tabulator("#table1", {
         {
             title: "Сtrl+P",
             field: "ctrlP",
-            hozAlign: "center",
+            hozAlign: "left",
             formatter: "tickCross",
             formatterParams: {
                 allowEmpty: true
@@ -193,16 +201,15 @@ document.getElementById("history-redo").addEventListener("click", function () {
     table.redo();
 });
 
+//add new row
 document.getElementById("add-row").addEventListener("click", function () {
     const inputs = document.getElementById('table2').querySelectorAll('INPUT');
     const dataNew = {};
-    inputs.forEach(input => dataNew[input.id] = input.id);
+    inputs.forEach(input => dataNew[input.id] = input.value);
 
-    dataNew.id = data[data.length];
-    dataNew.popularity = countPopularityStars(dataNew);
-
-    //add new info to db
-    data.push(dataNew);
+    dataNew.id = data.length;
+    countPopularityStars(dataNew);
+    console.log(dataNew);
 
     //update table
     table.addRow({
@@ -229,8 +236,14 @@ document.getElementById("add-row").addEventListener("click", function () {
         })
 })
 
+//delete row 
 document.getElementById("delete-row").addEventListener("click", function () {
+
     const rowNum = Number(document.getElementById('delrow').value);
-    table.deleteRow(rowNum);
+
+    table.deleteRow(rowNum)
+        .then(alert(`Удален ряд ${rowNum}`))
+        .catch(function (error) {
+            console.log(error);
+        })
 })
-//document.querySelectorAll('.tabulator-row')[0]//

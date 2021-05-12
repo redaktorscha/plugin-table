@@ -1,5 +1,6 @@
 /**
- * 
+ * updates obj data for star formatter
+ * @param {Object} - obj with data
  */
 const countPopularityStars = (obj) => {
     let {
