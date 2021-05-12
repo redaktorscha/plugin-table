@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./dist/css/materialize/tabulator_materialize.min.css" rel="stylesheet">
+    <script type="text/javascript" src="./dist/js/tabulator.min.js"></script>
+    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+    <title>WP Plugin Test Interactive Table</title>
+</head>
+
+<body style="margin: 0 auto; box-sizing: border-box; padding: 50px 0;">
+    <div>
+        <button id="history-undo">Отменить правку</button>
+        <button id="history-redo">Повторить правку</button>
+        <button id="download-xlsx">Загрузить XLSX</button>
+    </div>
+    <div id="table1"></div>
+    <div style="margin-top: 10px">
+        <button id="add-row">Добавить ряд</button>
+    </div>
+    <div id="table2" style="display: flex; width: 50%; flex-flow: column nowrap">
+        <input type="text" name="name" id="name" placeholder="Название">
+        <input type="text" name="link" id="link" placeholder="Ссылка">
+        <input type="text" name="compatibility" id="compatibility" placeholder="Совместимость">
+        <input type="text" name="screenshot" id="screenshot" placeholder="Cкриншот">
+        <input type="text" name="mobile" id="mobile" placeholder="Мобильные"> 
+        <input type="text" name="rightClick" id="rightClick" placeholder="Пр.клик">
+        <input type="text" name="textSelection" id="textSelection" placeholder="Выд-е текста">
+        <input type="text" name="F12" id="F12" placeholder="F12">
+        <input type="text" name="ctrlShiftI" id="ctrlShiftI" placeholder="Ctrl+Shift+I">
+        <input type="text" name="ctrlU" id="ctrlU" placeholder="Ctrl+U">
+        <input type="text" name="ctrlACVX" id="ctrlACVX" placeholder="Ctrl+A,C,V,X">
+        <input type="text" name="ctrlS" id="ctrlS" placeholder="Ctrl+S">
+        <input type="text" name="ctrlP" id="ctrlP" placeholder="Сtrl+P">
+        <input type="text" name="popularity" id="popularity" placeholder="Кол-во загрузок плагина">
+        <input type="text" name="note" id="note" placeholder="Замечания">
+    </div>
+    <div style="margin-top: 10px">
+        <button id="delete-row">Удалить ряд</button>
+        <input type="text" name="delrow" id="delrow" placeholder="Номер ряда">
+    </div>
+    <script type="module" src="./front/renderTable.js"></script>
+</body>
+
+</html>
